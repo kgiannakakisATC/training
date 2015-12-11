@@ -104,10 +104,26 @@ Copyright ©  2015
 ```
 
 ###### In a file
-To publish a component in a file you just have to set the path to a file in the *output.path* option.
+To publish a component in a file you just have to set the path to a file in the *output.path* option. As an example, see the following command:
+
+```
+kevoree-dotnet-model-generator.exe --package.name=HelloWorld --package.version=1.0.0.0
+--output.path=c:\Path\To\Models\Repository\mymodel.json
+--typeDef.name=HelloWorld --typeDef.version=1.0.0 --typeDef.package=HelloWorld
+--nuget.repository.url="http://localhost:81/nuget/Default"
+--nuget.local.repository.path=c:\Path\To\NugetLocalRepository
+```
 
 ###### In a registry
 To publish a component to a http Kevoree registry you can either ignore the option and the component will be published in the [official Kevoree registry](http://registry.kevoree.org) or a valid http url (you can, for example, deploy you own registry instances using [docker image](https://github.com/kevoree/docker-image-registry-replica)).
+
+##### Starting a node
+In order to test the component, you need to run a Kevoree node, using [dotnet boostrap](https://github.com/kevoree/kevoree-dotnet-core-bootstrap/releases/latest). The arguments passed to the kevoree-dotnet-model-generator.exe need to match the ones given for the generation of the model:
+
+```
+kevoree-dotnet-core-bootstrap.exe --nuget.repository.url=http://localhost:81/nuget/Default 
+--nuget.local.repository.path=c:\Path\To\NugetLocalRepository
+```
 
 ##### Defining the model
 If your component has been published into an http Kevoree registry, it should be available in the "Registry Libraries" tab of the [online editor](http://editor.kevoree.org/).
